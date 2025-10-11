@@ -43,6 +43,7 @@ dmesg | head
 ## Hasil Eksekusi
 Sertakan screenshot hasil percobaan atau diagram:
 ![alt text](<screenshots/ss eca.png>)
+![alt text](<screenshots/ss diagram.png>)
 
 ---
 
