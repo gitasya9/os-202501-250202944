@@ -47,6 +47,8 @@ Sertakan screenshot hasil percobaan atau diagram:
 ![alt text](<screenshots/stracels.png>)
 ![alt text](<screenshots/stracels01.png>)
 ![alt text](<screenshots/strace -e.png>)
+![alt text](<screenshots/dmesg tail-nweek2.png>)
+![alt text](<screenshots/diagramweek2.png>)
 
 
 ---
