@@ -9,3 +9,14 @@ mmap(NULL, 35463, PROT_READ, MAP_PRIVATE, 3, 0) = 0x78e9db71f000
 close(3)                                = 0
 openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libselinux.so.1", O_RDONLY|O_CLOEXEC) = 3
 read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+
+
+| System call | Fungsi Utama | Penjelasan | Keterangan |
+| :--- | :--- | :--- | :--- |
+| `execve("/usr/bin/ls", ["ls"] ...)` | Menjalankan porgram baru | Menjalankan program `ls` menggantikan proses saat ini | `=0` berhasil dijalankan |
+| `mmap(NULL, 8192, PROT_READ` | `PROT_WRITE, MAP_PRIVATE` | `MAP_ANONYMOUS, -1, 0)` | Memetakan momori baru |
+| `access("/etc/ld.so.preload", R_OK)` | Mengecek keberadaan file | Mengecek apakah file preload library ada | `-1 ENOENT` (tidak ada file normal) |
+| `fstat(3,` | Mengecek informasi file | Mendapatkan detail file yang baru dibuka (ukuran, model, dll).| `=0` berhasil |
+| `close(3)` | Menutup file descriptor | Menutup file `ld.so.cache` setelah selesai digunakan | `=0` berhasil |
+| `openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libselinux.so.1", O_RDONLY` | O_CLOEXEC) | Membuka pustaka dinamis | Memuat library `libselinux.so.1` yang dibutuhlan o;eh `ls` |
+| `read(3, "\177ELF\2\1\1\0...", 832` | Membaca isi file library | Membaca bagian awal library untuk memeriksa format ELF |`=832 byte` dibaca |
