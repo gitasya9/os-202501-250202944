@@ -167,7 +167,7 @@ Sistem operasi menjaga agar perpindahan dari mode pengguna ke mode kernel berlan
 ## Quiz
 1. Apa fungsi utama system call dalam sistem operasi?
    
-   Fungsi utama system call adalah menghubungkan program pengguna dengan sistem operasi agar dapat meminta layanan seperti membuka file, membuat proses, atau        membaca data tanpa mengakses perangkat keras. System call juga memastikan setiap permintaan pengguna dijalankan melalui prosedur yang aman di kernel sehingga     mencegah kesalahan atau gangguan pada sistem. Dengan cara ini, system call menjaga agar interaksi antara pengguna dan sumber daya komputer tetap teratur,         aman, dan efisien.
+   Fungsi utama system call adalah menghubungkan program pengguna dengan sistem operasi agar dapat meminta layanan       seperti membuka file, membuat proses, atau  membaca data tanpa mengakses perangkat keras. System call juga            memastikan setiap permintaan pengguna dijalankan melalui prosedur yang aman di kernel sehingga     mencegah           kesalahan atau gangguan pada sistem. Dengan cara ini, system call menjaga agar interaksi antara pengguna dan          sumber daya komputer tetap teratur, aman, dan efisien.
 ---
 2. Sebutkan 4 kategori system call yang umum digunakan.
    | Kategori system call | Fungsi Utama | Contoh di Linux/UNIX |
@@ -180,14 +180,14 @@ Sistem operasi menjaga agar perpindahan dari mode pengguna ke mode kernel berlan
 ---
 3. Mengapa system call tidak bisa dipanggil langsung oleh user program?
    
-   System call tidak bisa dipanggil lansung oleh program pengguna kerena intruksi yang dijalankan bersifat khusus dan hanya boleh dilakukan oleh kernel. Jika        pengguna diizinkan menjalankan instruksi tersebut langsung, maka bisa terjadi, kerusakan sistem atau pelanggaran keamanan. Oleh karena itu, setiap permintaan     dari program pengguna harus melalui metode system call agar dapat terverifikasi dan dijalankan dengan aman oleh kernel. 
+   System call tidak bisa dipanggil lansung oleh program pengguna kerena intruksi yang dijalankan bersifat khusus dan    hanya boleh dilakukan oleh kernel. Jika pengguna diizinkan menjalankan instruksi tersebut langsung, maka bisa         terjadi, kerusakan sistem atau pelanggaran keamanan. Oleh karena itu, setiap permintaan dari program pengguna         harus melalui metode system call agar dapat terverifikasi dan dijalankan dengan aman oleh kernel. 
 
 ---
 
 ## Refleksi Diri
 Tuliskan secara singkat:
-- Apa bagian yang paling menantang minggu ini?  
-- Bagaimana cara Anda mengatasinya?  
+- Apa bagian yang paling menantang minggu ini? Memahami makna setiap system call yang muncul selama proses eksekusi.
+- Bagaimana cara Anda mengatasinya? Untuk mengatasi kesulitan dalam memahami saya mencari referensi dari berbagai sumber di internet.
 
 ---
 
