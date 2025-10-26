@@ -117,7 +117,7 @@ Tuliskan potongan kode atau perintah utama:
 | :--- | :--- | :--- |
 | `pwd` | `/home/keysyagita` | Perintah `pwd` digunakan untuk menampilkan direktori aktif. Hasil tersebut menunjukkan bahwa direktori kerja yang digunakan oleh `/home/keysyagita`, yaitu direktori home milik pengguna `keysyagita`. |
 | `ls -l` | `-rw------- 1 keysyagita keysyagita 33 Oct 22 23:00 percobaan.txt` | Perintah `ls -l` berfungsi menampilkan isi direktori dalam format panjang. Hasil menunjukkan file bernama `percobaan.txt` dengan izin `-rw------- `, artinya adalah pemilik file yang memiliki izin membaca(r), dan menulis(w). Grup dan pengguna lain tidak memiliki akses terhadap file tersebut. |  
-| `cs /tmp` | Tidak menampilkan output | Perintah `cd` digunakan untuk berpindah ke direktori lain. Pada perintah tersebut, direktori aktif berpindah ke `/tmp`, yaitu direktori sementara yang digunakan oleh sistem untuk menyimpan file sementara. |
+| `cd /tmp` | Tidak menampilkan output | Perintah `cd` digunakan untuk berpindah ke direktori lain. Pada perintah tersebut, direktori aktif berpindah ke `/tmp`, yaitu direktori sementara yang digunakan oleh sistem untuk menyimpan file sementara. |
 | `ls -a` | ` .XIM-unix`, `.font-unix`, `.ICE-unix`, `.Test-unix`, `.X11-unix`, `| Perintah `ls -l` menampilkan seluruh file dan direktori. Direktori `/tmp` berisi beberapa file sementara yang digunakan oleh sistem. Untuk melihat seluruh file termasuk file tersembunyi, digunakan perintah `ls -a`. |
 
 ---
