@@ -84,37 +84,105 @@ Dalam sistem operasi terdapat berbagai algoritma yang digunakan untuk mengatur u
 
 ## Kode / Perintah
 Tuliskan potongan kode atau perintah utama:
-     ```
+
      WT[i] = waktu mulai eksekusi - Arrival[i]
      TAT[i] = WT[i] + Burst[i]
-     ```
+     Average Waiting Time (WT) = Total WT / Jumlah Proses
+     Average Turnaround Time (TAT) = Total TAT / Jumlah Proses
 
 ---
 
 ## Hasil Eksekusi
-Sertakan screenshot hasil percobaan atau diagram:
-![Screenshot hasil](screenshots/example.png)
+![alt text](<screenshots/rr-priorityweek6.png>)
 
 ---
+### Eksperimen 1 - Round Robin (RR)
+Berikut hasil perhitungan *waiting time* dan *turnaround time* dengan *time quantum (q)* 3:
+							
+|Proses|	Burst Time|	Arrival Time|	Finish Time (P1)|	Finish Time (P2)|	Finish Time (P3)|	WT|	TAT|
+|:---|:---|:---|:---|:---|:---|:---|:---|
+| P1 |	5 |	0 |	3 (sisa 2) | 14 (sisa 2) |	- | 14-5= 9 |	14-0= 14 |
+| P2 |	3 |	1 |	6 (selesai) | - |	- | 5-3= 2	| 6-1= 5 |
+| P3 |	8 |	2 |	9 (sisa 5) | 17 (sisa 2) |	22| 20-8= 12|	22-2= 20 |
+| P4 |	6 |	3 |  12 (sisa 3) | 20 (selesai) | - | 17-6= 11 | 20-3= 17 |
+| Total    |     |     |    |   ||34 | 56 |
+| Average  |	  |     |    |   ||8.5|	14 |
 
+Simulasikan eksekusi menggunakan `Gantt Chart`:
+```
+    | P1 | P2 | P3 | P4 | P1 | P3 | P4 | P3 |
+    0    3    6    9   12   14   17   20   22
+```
+---
+### Eksperimen 2 - Priority Scheduling (Non-Preemptive)
+Proses telah diurutkan berdasarkan nilai prioritas (angka kecil = prioritas tinggi) sehingga urutan eksekusi menjadi P1 → P2 → P4 → P3. Berikut adalah hasil perhitungan nilai *Waiting Time (WT)* dan *Turnaround Time (TAT)*:
+
+| Proses |	Arrival Time | Burst Time	| Start Time |	Priority |	WT= Start-AT | TAT= WT+BT |
+|:---|:---|:---|:---|:---|:---|:---|
+| P1 | 0 | 5 | 0 | 2 | 0 | 0+5= 5 |
+| P2 | 1 | 3 | 5 | 1 | 5-1= 4 | 4+3= 7 |
+| P3 | 3 | 6 | 8 | 3 | 8-3= 5 | 5+6= 11 | 
+| P4 | 2 | 8 | 14| 4 | 14-2= 12 | 12+8= 20 |
+| Total || | | | 21 | 43 |
+| Average || | || 5.25 | 10.75 |
+
+---
+### Eksperimen 3 - Variasi Time Quantum 
+Berikut merupakan hasil perhitungan *waiting time* dan *turnaround time* untuk masing-masing variasi *time quantum* 2 dan 5:
+
+![alt text](<screenshots/rr-quantumweek6.png>)
+
+**Time Quantum (q): 2**
+
+![alt text](<screenshots/quantum2-week6.png>)
+
+**Time Quantum (q) : 5**
+
+![alt text](<screenshots/quantum5-week6.png>)
+
+- `Gantt Chart` akan menghasikan sebagai berikut:
+  
+  **Time Quantum (q): 2**
+  ```
+     | P1 | P2 | P3 | P4 | P1 | P2 | P3 | P4 | P1 | P3 | P4 | P3 |
+     0    2    4    6    8   10    11   13   15   16   18   20   22
+  ```
+  **Time Quantum (q): 5**
+  ```
+     | P1 | P2 | P3 | P4 | P3 | P4 |
+     0    5    8   13   18   21   22
+  ```
+**Perbandingan Efek Quantum**
+| Time Quantum | Avg WT | Avg TAT | Efek / Analisis |
+|:---|:---|:---|:---|
+| Q= 2 | 10.25 | 15.75 | *Waiting time* dan *Turnaround time* menjadi lebih lama karena quantum yang kecil membuat proses sering dipotong dan bergantian, sehingga antrian semakin panjang dan penyelesaiannya ikut tertunda.
+| Q= 5 | 7 | 12.5 | *Waiting time* dan *Turnaround time* menjadi lebih cepat karena quantum yang lebih besar membuat proses tidak sering dipotong, sehingga proses dapat berjalan  lebih lama, antrian maju lebih cepat dan waktu penyelesaian menjadi lebih singkat. |
+
+---
+### Eksperimen 4 - Perbandingan Round Robin dan Priority Scheduling
+| Algoritma | Avg Waiting Time | Avg Turnaround Time | Kelebihan | Kekurangan |
+|------------|------------------|----------------------|------------|-------------|
+| RR | 8.5 | 14 | Adil terhadap semua proses | Tidak efisien jika quantum tidak tepat |
+| Priority | 5.25 | 10.75 | Efisien untuk proses penting | Potensi *starvation* pada prioritas rendah |
+
+---
 ## Analisis
-- Jelaskan makna hasil percobaan.  
-- Hubungkan hasil dengan teori (fungsi kernel, system call, arsitektur OS).  
-- Apa perbedaan hasil di lingkungan OS berbeda (Linux vs Windows)?  
+
+Berdasarkan hasil eksperimen, Priority Scheduling menghasilkan rata-rata *waiting time* dan *turnaround time* yang lebih rendah karena proses berprioritas tinggi langsung dijalankan. Sebaliknya, pada Round Robin proses harus menunggu beberapa giliran sesuai time quantum, sehingga waktu tunggu dan waktu eksekusi menjadi lebih lama. Pada RR dengan quantum 2, performanya paling buruk karena waktu tunggu dan waktu selesai menjadi paling lama (Avg WT = 10.25, Avg TAT = 15.75) akibat proses terlalu sering dipotong. Sementara itu, RR dengan quantum 5 menunjukkan performa lebih baik (Avg WT = 7, Avg TAT = 12.5) karena proses mendapat jatah waktu lebih panjang dan tidak terlalu sering berganti.
+
+Pada Priority Scheduling, urutan eksekusi ditentukan oleh tingkat prioritas sehingga proses dengan prioritas tertinggi dijalankan terlebih dahulu. Cara kerja ini membuat waktu tunggu dan waktu selesai lebih rendah bagi proses berprioritas tinggi, sementara proses berprioritas rendah bisa menunggu lebih lama. Perbedaan cara eksekusi inilah yang menyebabkan performanya berbeda, dengan Round Robin cenderung menghasilkan waktu tunggu dan waktu selesai lebih besar dibandingkan Priority Scheduling.
 
 ---
 
 ## Kesimpulan
-Tuliskan 2–3 poin kesimpulan dari praktikum ini.
+- Priority Scheduling menghasilkan *waiting time* dan *turnaround time* yang lebih rendah karena proses berprioritas    tinggi langsung dieksekusi.
+- Round Robin menghasilkan waktu tunggu dan waktu selesai yang lebih besar karena proses harus menunggu giliran         sesuai time quantum.
+- Semakin besar time quantum, semakin cepat proses selesai pada RR, tetapi jika quantum terlalu besar, sifat RR         mendekati FCFS.
+- Priority Scheduling berpotensi menyebabkan starvation, terutama pada proses berprioritas rendah, karena tidak         mendapatkan kesempatan eksekusi jika terus ada proses dengan prioritas lebih tinggi.
 
 ---
-## Tugas
-1. Hitung *waiting time* dan *turnaround time* untuk algoritma RR dan Priority.  
-2. Sajikan hasil perhitungan dan Gantt Chart dalam `laporan.md`.  
-3. Bandingkan performa dan jelaskan pengaruh *time quantum* serta prioritas.  
-4. Simpan semua bukti (tabel, grafik, atau gambar) ke folder `screenshots/`.
----
 ## Quiz
+
 **1. Apa perbedaan utama antara Round Robin dan Priority Scheduling?**
     
    Round Robin berfokus pada **pembagian waktu yang adil (fairness)** antar proses dan lebih sesuai untuk sistem         time-sharing yang membutuhkan respons cepat, sedangkan Priority SCheduling berfokus pada **tingkat kepentingan        proses (importance)** dan lebih efektif digunakan pada sistem yang menuntut penanganan cepat terhadap proses          penting.
@@ -134,8 +202,11 @@ Tuliskan 2–3 poin kesimpulan dari praktikum ini.
 
 ## Refleksi Diri
 Tuliskan secara singkat:
-- Apa bagian yang paling menantang minggu ini?  
-- Bagaimana cara Anda mengatasinya?  
+- Apa bagian yang paling menantang minggu ini?
+  Yang menantang pada minggu ini adalah memahami algoritma Round Robin dan cara kerja time quantum, serta membedakan    cara kerja Round Robin dengan Priority Scheduling.
+
+- Bagaimana cara Anda mengatasinya?
+  Untuk mengatasinya, saya menanyakan kepada teman yang memahami dalam perhitungan Round Robin dan mencari referensi    tambahan dari internet, serta mencoba memahami ulang dalam perhitungan tersebut. 
 
 ---
 
