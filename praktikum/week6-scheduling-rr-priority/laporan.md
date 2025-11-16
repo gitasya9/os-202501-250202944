@@ -130,7 +130,7 @@ Proses telah diurutkan berdasarkan nilai prioritas (angka kecil = prioritas ting
 ### Eksperimen 3 - Variasi Time Quantum 
 Berikut merupakan hasil perhitungan *waiting time* dan *turnaround time* untuk masing-masing variasi *time quantum* 2 dan 5:
 
-![alt text](<screenshots/rr-quantumweek6.png>)
+![alt text](<screenshots/rr-quantumwekk6.png>)
 
 **Time Quantum (q): 2**
 
